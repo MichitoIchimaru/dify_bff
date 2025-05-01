@@ -1,0 +1,45 @@
+openapi: "3.0.3"
+info:
+  title: Dify BFF
+  version: "1.0"
+servers:
+  - url: http://localhost/api/v1
+paths:
+  /chat-messages:
+    post:
+      summary: "チャットAPI"
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  example: こんにちは
+                message_id:
+                  type: string
+                  example: 95eae773-01b2-47c4-8574-c9d4b172a409
+                conversation_id:
+                  type: string
+                  example: bca0b62d-858d-46bb-ae58-618adf02f52b
+              required:
+                - query
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answer:
+                    type: string
+                    example: こんにちは！ 😄  何かお困りですか？ 😊 \n
+                  message_id:
+                    type: string
+                    example: 95eae773-01b2-47c4-8574-c9d4b172a409
+                  conversation_id:
+                    type: string
+                    example: bca0b62d-858d-46bb-ae58-618adf02f52b
