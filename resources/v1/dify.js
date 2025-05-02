@@ -40,13 +40,17 @@ router.post("/chat-messages", async ctx => {
   for await (const chunk of stream.body) {
     const text = new TextDecoder("utf-8").decode(chunk)
     const json = JSON.parse(text)
-    logger.debug(json)
+    logger.debug("chunk\n", json)
     res.message_id = json["message_id"]
     res.conversation_id = json["conversation_id"]
     responseText += json.answer
   }
   res.answer = responseText
   ctx.body = res
+  if (!stream.ok) {
+    ctx.status = 400
+    ctx.body = { answer: "エラーが発生しました" }
+  }
 })
 
 module.exports = router

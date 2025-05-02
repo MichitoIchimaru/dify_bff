@@ -57,5 +57,5 @@ app.use(routerV1.routes())
 app.use(routerV1.allowedMethods())
 
 const port = process.env.DIFY_BFF_PORT ? parseInt(process.env.DIFY_BFF_PORT, 10) : 3000
-app.listen(port)
+app.listen(port, "0.0.0.0")
 logger.info("Server running on http://localhost:" + port)
